@@ -1,4 +1,4 @@
-package com.mukasz.quizplatform.security.model;
+package com.mukasz.quizplatform.model;
 
 public enum UserGroup {
     SYS_ADMIN,

@@ -1,4 +1,4 @@
-package com.mukasz.quizplatform.core.model.entity;
+package com.mukasz.quizplatform.model.entity;
 
 import javax.persistence.*;
 import java.util.List;

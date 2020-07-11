@@ -1,10 +1,9 @@
-package com.mukasz.quizplatform.core.model.entity;
+package com.mukasz.quizplatform.model.entity;
 
 import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Data

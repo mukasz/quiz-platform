@@ -1,17 +1,20 @@
-package com.mukasz.quizplatform.core.model.entity;
+package com.mukasz.quizplatform.model.entity;
 
-import com.mukasz.quizplatform.core.model.QuestionType;
-import lombok.Builder;
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.mukasz.quizplatform.model.QuestionType;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Data
 @Builder
-@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "questions")
+@Entity
 public class Question {
     @Id
     @GeneratedValue
@@ -27,8 +30,8 @@ public class Question {
     @Column(name = "points")
     private Integer points;
 
-    @OneToMany(mappedBy = "question")
-    private List<Answer> answers;
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private List<Answer> answers = new ArrayList<>();
 
     @ManyToMany(mappedBy = "questionPool")
     private Set<Quiz> usedInQuizes;

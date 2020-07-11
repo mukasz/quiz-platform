@@ -1,6 +1,6 @@
-package com.mukasz.quizplatform.core.model.entity;
+package com.mukasz.quizplatform.model.entity;
 
-import com.mukasz.quizplatform.security.model.UserGroup;
+import com.mukasz.quizplatform.model.UserGroup;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

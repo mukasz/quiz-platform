@@ -1,8 +1,8 @@
-package com.mukasz.quizplatform.core.controller;
+package com.mukasz.quizplatform.controller;
 
-import com.mukasz.quizplatform.core.dao.UserDAO;
-import com.mukasz.quizplatform.core.model.entity.User;
-import com.mukasz.quizplatform.security.model.UserGroup;
+import com.mukasz.quizplatform.dao.UserDAO;
+import com.mukasz.quizplatform.model.entity.User;
+import com.mukasz.quizplatform.model.UserGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.mukasz.quizplatform.core.model;
+package com.mukasz.quizplatform.model;
 
 public enum QuestionType {
     SINGLE_CHOICE,

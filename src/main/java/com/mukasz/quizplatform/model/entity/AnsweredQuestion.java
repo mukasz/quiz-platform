@@ -1,4 +1,4 @@
-package com.mukasz.quizplatform.core.model.entity;
+package com.mukasz.quizplatform.model.entity;
 
 import javax.persistence.*;
 
@@ -14,6 +14,7 @@ public class AnsweredQuestion {
     @JoinColumn(name = "submition_id")
     private QuizSubmition quizSubmition;
 
+    // TODO: replace with ManyToMany
     @ManyToOne
     @JoinColumn(name = "answer_id")
     private Answer answer;
