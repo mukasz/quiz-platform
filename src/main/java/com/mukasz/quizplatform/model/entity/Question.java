@@ -30,7 +30,7 @@ public class Question {
     @Column(name = "points")
     private Integer points;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Answer> answers = new ArrayList<>();
 
     @ManyToMany(mappedBy = "questionPool")
