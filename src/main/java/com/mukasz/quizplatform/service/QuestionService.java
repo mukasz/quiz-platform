@@ -22,9 +22,9 @@ public class QuestionService {
         this.questionDAO = questionDAO;
     }
 
-    public Question createQuestion(QuestionDTO questionDTO) {
+    public QuestionDTO createQuestion(QuestionDTO questionDTO) {
         Question question = QuestionConverter.convertDTOToQuestion(questionDTO);
-        return questionDAO.save(question);
+        return QuestionConverter.convertToDTO(questionDAO.save(question));
     }
 
     public List<QuestionDTO> getAllQuestions() {
