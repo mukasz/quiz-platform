@@ -17,3 +17,10 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
+
+quiz-platform:
+  security:
+    jwt:
+      issuer: quiz-platform-authenticator
+      audience: quiz-platform
+      validitytime: 3600 #seconds

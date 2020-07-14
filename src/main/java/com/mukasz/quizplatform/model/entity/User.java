@@ -1,16 +1,19 @@
 package com.mukasz.quizplatform.model.entity;
 
-import com.mukasz.quizplatform.model.UserGroup;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "users")
 @Data
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class User {
     @Id
@@ -18,14 +21,13 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    @Column(name = "username", unique = true)
-    private String username;
+    @Column(name = "displayed_name")
+    private String displayedName;
 
-    @Column(name = "password_hash")
-    private String passwordHash;
-
-    @Column(name = "user_group")
-    private UserGroup userGroup;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "authentication_user_id")
+    @JsonIgnoreProperties
+    private AuthenticationUser authenticationUser;
 
     @ManyToMany(mappedBy = "participants")
     private Set<Quiz> participatedQuizes;

@@ -8,8 +8,7 @@ import com.mukasz.quizplatform.model.QuestionType;
 import com.mukasz.quizplatform.model.entity.Answer;
 import com.mukasz.quizplatform.model.entity.Question;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,8 +22,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+// POST TEST MUST BE ET THE END - they changes state of DB
+
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class QuestionsIntegrationTest {
 
     @Autowired
@@ -37,6 +39,7 @@ class QuestionsIntegrationTest {
     private QuestionDAO questionDAO;
 
     @Test
+    @Order(1)
     @DisplayName("GET /questions -> Questions[]: length 2")
     @SneakyThrows
     void whenGetAllQuestions_shouldReturnProperQuestionsList() {
@@ -51,6 +54,7 @@ class QuestionsIntegrationTest {
     }
 
     @Test
+    @Order(2)
     @DisplayName("GET /questions/1100 -> Question(Test Q1 ,a - correct, b - incorrect, c - incorect)")
     @SneakyThrows
     void whenGetQuestion1_shouldReturnProperQuestion() {
@@ -71,6 +75,7 @@ class QuestionsIntegrationTest {
     }
 
     @Test
+    @Order(3)
     @DisplayName("GET /questions/3(wrong id) -> HTTP NOT_FOUND(404)")
     @SneakyThrows
     void whenGetQuestionWithWrongId_shouldReturn404() {
@@ -83,6 +88,7 @@ class QuestionsIntegrationTest {
     }
 
     @Test
+    @Order(4)
     @DisplayName("GET /questions/str(wrong id) -> HTTP BAD_REQUEST(400)")
     @SneakyThrows
     void whenGetQuestionWithStringId_shouldReturn400() {
@@ -95,13 +101,14 @@ class QuestionsIntegrationTest {
     }
 
     @Test
+    @Order(5)
     @DisplayName("POST /questions with proper response bode -> HTTP 200, added new Question")
     @SneakyThrows
     void whenPostQuestionWithProperQuestion_shouldAddQuestion() {
         String responseBody = mockMvc.perform(post("/questions")
                 .content(objectMapper.writeValueAsString(getTestQuestion_correct()))
                 .contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(status().isOk())
+        ).andExpect(status().isCreated())
                 .andReturn()
                 .getResponse()
                 .getContentAsString();
@@ -120,11 +127,10 @@ class QuestionsIntegrationTest {
         assertThat(answersInDb.stream().anyMatch(a -> "a".equals(a.getInternalId()) && a.getIsCorrect())).isEqualTo(true);
         assertThat(answersInDb.stream().anyMatch(a -> "b".equals(a.getInternalId()) && !a.getIsCorrect())).isEqualTo(true);
 
-        //Cleanup
-        questionDAO.deleteById(id);
     }
 
     @Test
+    @Order(6)
     @DisplayName("POST /questions with inproper response body -> HTTP 400 BAD REQUEST")
     @SneakyThrows
     void whenPostQuestionWithBadQuestion_shouldReturn400() {

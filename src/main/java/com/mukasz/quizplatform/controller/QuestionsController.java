@@ -5,6 +5,7 @@ import com.mukasz.quizplatform.model.entity.Question;
 import com.mukasz.quizplatform.service.QuestionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,12 +36,14 @@ public class QuestionsController {
 
     @ApiOperation(value = "Add new question")
     @PostMapping
+    @ResponseStatus(value = HttpStatus.CREATED)
     public QuestionDTO createQuestion(@RequestBody QuestionDTO question) {
         return questionService.createQuestion(question);
     }
 
     @ApiOperation(value = "Add list of questions", responseReference = "List of ids of added questions")
     @PostMapping("/list")
+    @ResponseStatus(value = HttpStatus.CREATED)
     public List<Long> createManyQuestions(@RequestBody List<QuestionDTO> questions) {
         return questionService.createManyQuestions(questions);
     }
